@@ -10,11 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_06_14_072123) do
+ActiveRecord::Schema[8.1].define(version: 2026_06_15_162449) do
+  create_table "todos", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.text "description"
+    t.boolean "is_completed"
+    t.string "title"
+    t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
+    t.index ["user_id"], name: "index_todos_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "name"
     t.string "role"
     t.datetime "updated_at", null: false
   end
+
+  add_foreign_key "todos", "users"
 end
