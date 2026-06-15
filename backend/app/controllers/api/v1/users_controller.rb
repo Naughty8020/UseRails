@@ -13,6 +13,25 @@ class Api::V1::UsersController < ActionController::API
     end
   end
 
+
+  def update
+    user = User.find(params[:id])
+    if user.update(user_params)
+      render json: { status: 'SUCCESS', data: user }
+    else
+      render json: { status: 'ERROR', data: user.errors }, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    user = User.find(params[:id])
+    if user.destroy
+      render json: { status: 'SUCCESS', message: 'Deleted user' }
+    else
+      render json: { status: 'ERROR', data: user.errors }, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def user_params
