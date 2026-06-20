@@ -33,7 +33,7 @@ class Api::V1::TodosController < ActionController::API
     end
 
     private
-    def todo_params  # update の中に含まれちゃって、単独のメソッドとして認識されない
+    def todo_params 
     params.require(:todo).permit(:title, :description, :is_completed, :user_id)
     end
 end
